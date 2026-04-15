@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -48,11 +50,10 @@ const Login = () => {
     if (Object.keys(newErrors).length === 0) {
       setSubmitted(true)
       console.log('Login successful:', formData)
-      // Reset form after successful submission
+      // Redirect to dashboard after 1.5 seconds
       setTimeout(() => {
-        setFormData({ email: '', password: '' })
-        setSubmitted(false)
-      }, 2000)
+        navigate('/dashboard')
+      }, 1500)
     } else {
       setErrors(newErrors)
     }
@@ -75,8 +76,8 @@ const Login = () => {
 
           {/* Success Message */}
           {submitted && (
-            <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
-              Login successful! Welcome back.
+            <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg animate-pulse">
+              Login successful! Redirecting to dashboard...
             </div>
           )}
 
@@ -136,9 +137,10 @@ const Login = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 px-4 rounded-lg transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              disabled={submitted}
+              className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-400 text-white font-semibold py-2.5 px-4 rounded-lg transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
-              Sign In
+              {submitted ? 'Redirecting...' : 'Sign In'}
             </button>
           </form>
 
