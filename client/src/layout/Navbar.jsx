@@ -23,13 +23,12 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
+    <nav className="bg-[#f6fafd] sticky top-0 z-50">
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           
           {/* Left Side - Medical Name/Logo */}
           <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-2 group">
               <div className="bg-gradient-to-br from-indigo-600 to-blue-600 p-2 rounded-lg group-hover:shadow-lg transition">
                 <svg
                   className="w-6 h-6 text-white"
@@ -42,7 +41,6 @@ const Navbar = () => {
               <span className="hidden sm:inline text-xl font-bold bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent">
                 MedicalHub
               </span>
-            </Link>
           </div>
 
           {/* Right Side - Icons */}

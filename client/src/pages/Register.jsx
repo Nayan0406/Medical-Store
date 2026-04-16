@@ -1,6 +1,9 @@
+
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -48,18 +51,36 @@ const Register = () => {
     return newErrors
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const newErrors = validateForm()
+    setErrors({})
     
     if (Object.keys(newErrors).length === 0) {
-      setSubmitted(true)
-      console.log('Form submitted:', formData)
-      // Reset form after successful submission
-      setTimeout(() => {
-        setFormData({ username: '', email: '', password: '' })
-        setSubmitted(false)
-      }, 2000)
+      try {
+        const response = await fetch('http://localhost:5000/api/auth/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        })
+        const data = await response.json()
+        if (response.ok) {
+          setSubmitted(true)
+          // Redirect to login after short delay
+          setTimeout(() => {
+            setFormData({ username: '', email: '', password: '' })
+            setSubmitted(false)
+            navigate('/login')
+          }, 1500)
+        } else {
+          // Show backend error message
+          setErrors({ api: data.message || 'Registration failed' })
+        }
+      } catch (err) {
+        setErrors({ api: 'Network error. Please try again.' })
+      }
     } else {
       setErrors(newErrors)
     }
@@ -80,6 +101,12 @@ const Register = () => {
             </p>
           </div>
 
+          {/* API Error Message */}
+          {errors.api && (
+            <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+              {errors.api}
+            </div>
+          )}
           {/* Success Message */}
           {submitted && (
             <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">

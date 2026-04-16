@@ -5,6 +5,8 @@ import Register from './pages/Register'
 import MainLayout from './layout/MainLayout'
 import Dashboard from './components/Dashboard'
 import Setting from './components/Setting'
+import Inventory from './components/Inventory'
+import Suppliers from './components/Suppliers'
 
 function App() {
   return (
@@ -43,10 +45,7 @@ function App() {
             path='/inventory'
             element={
               <MainLayout>
-                <div className="bg-white rounded-lg shadow p-6">
-                  <h1 className="text-3xl font-bold text-gray-800">Inventory</h1>
-                  <p className="text-gray-600 mt-2">Inventory list coming soon...</p>
-                </div>
+                <Inventory />
               </MainLayout>
             }
           />
@@ -59,6 +58,15 @@ function App() {
                   <h1 className="text-3xl font-bold text-gray-800">Customers</h1>
                   <p className="text-gray-600 mt-2">Customers list coming soon...</p>
                 </div>
+              </MainLayout>
+            }
+          />
+
+          <Route
+            path='/suppliers'
+            element={
+              <MainLayout>
+                <Suppliers />
               </MainLayout>
             }
           />
@@ -83,18 +91,6 @@ function App() {
               </MainLayout>
             }
           />
-          
-          {/* <Route
-            path='/help'
-            element={
-              <MainLayout>
-                <div className="bg-white rounded-lg shadow p-6">
-                  <h1 className="text-3xl font-bold text-gray-800">Help</h1>
-                  <p className="text-gray-600 mt-2">Help page coming soon...</p>
-                </div>
-              </MainLayout>
-            }
-          /> */}
         </Routes>
       </BrowserRouter>
     </>

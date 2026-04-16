@@ -38,12 +38,18 @@ const Sidebar = () => {
     },
     {
       id: 5,
+      label: 'Suppliers',
+      icon: MdGroup,
+      path: '/suppliers'
+    },
+    {
+      id: 6,
       label: 'Reports',
       icon: MdAnalytics,
       path: '/reports'
     },
     {
-      id: 6,
+      id: 7,
       label: 'Settings',
       icon: MdSettings,
       path: '/settings'
@@ -68,10 +74,9 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-16 h-[calc(100vh-64px)] bg-gray-900 text-white transition-all duration-300 z-30 ${
+        className={`fixed left-0 top-16 h-[calc(100vh-64px)] bg-[#f6fafd] text-gray-800 transition-all duration-300 z-30 ${
           isOpen ? 'w-64' : 'w-0 -translate-x-full'
-        } lg:translate-x-0 lg:w-64 overflow-y-auto flex flex-col`}
-      >
+        } lg:translate-x-0 lg:w-64 overflow-y-auto flex flex-col`}>
         <div className="p-6 flex-1">
           {/* Sidebar Header */}
           {/* <div className="mb-8">
@@ -87,7 +92,7 @@ const Sidebar = () => {
                   key={item.id}
                   to={item.path}
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center space-x-3 px-4 py-3 text-gray-300 hover:text-indigo-400 hover:bg-gray-800 rounded-lg transition group"
+                  className="flex items-center space-x-3 px-4 py-3 text-gray-800 hover:text-indigo-500 hover:bg-[#eaf3fa] rounded-lg transition group"
                 >
                   <Icon className="w-5 h-5 group-hover:text-indigo-400 transition" />
                   <span className="font-medium">{item.label}</span>
@@ -98,10 +103,10 @@ const Sidebar = () => {
         </div>
 
         {/* Sidebar Footer - Sticky to Bottom */}
-        <div className="p-6 border-t border-gray-700">
-          <div className="px-4 py-3 bg-gray-800 rounded-lg">
-            <p className="text-xs text-gray-400">Medical Software v1.0</p>
-            <p className="text-xs text-gray-500 mt-1">© 2026 All rights reserved</p>
+        <div className="p-6">
+          <div className="px-4 py-3 bg-[#eaf3fa] rounded-lg">
+            <p className="text-xs text-gray-500">Medical Software v1.0</p>
+            <p className="text-xs text-gray-400 mt-1">© 2026 All rights reserved</p>
           </div>
         </div>
       </aside>

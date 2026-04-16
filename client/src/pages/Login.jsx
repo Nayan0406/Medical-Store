@@ -43,17 +43,32 @@ const Login = () => {
     return newErrors
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const newErrors = validateForm()
+    setErrors({})
     
     if (Object.keys(newErrors).length === 0) {
-      setSubmitted(true)
-      console.log('Login successful:', formData)
-      // Redirect to dashboard after 1.5 seconds
-      setTimeout(() => {
-        navigate('/dashboard')
-      }, 1500)
+      try {
+        const response = await fetch('http://localhost:5000/api/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        })
+        const data = await response.json()
+        if (response.ok) {
+          setSubmitted(true)
+          setTimeout(() => {
+            navigate('/dashboard')
+          }, 1500)
+        } else {
+          setErrors({ api: data.message || 'Login failed' })
+        }
+      } catch (err) {
+        setErrors({ api: 'Network error. Please try again.' })
+      }
     } else {
       setErrors(newErrors)
     }
@@ -74,6 +89,12 @@ const Login = () => {
             </p>
           </div>
 
+          {/* API Error Message */}
+          {errors.api && (
+            <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+              {errors.api}
+            </div>
+          )}
           {/* Success Message */}
           {submitted && (
             <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg animate-pulse">
