@@ -58,7 +58,7 @@ const Register = () => {
     
     if (Object.keys(newErrors).length === 0) {
       try {
-        const response = await fetch('http://localhost:5000/api/auth/register', {
+        const response = await fetch('https://medical-store-backend-chi.vercel.app/api/auth/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
