@@ -12,9 +12,6 @@ Express.js backend API for Medical Software application.
 2. **Update .env file**
    Add your MongoDB URI and other environment variables:
    ```
-   MONGODB_URI=mongodb+srv://nayan:Nayan04@cluster0.89f8n9b.mongodb.net/?appName=Cluster0
-   PORT=5000
-   JWT_SECRET=your_jwt_secret_key
    ```
 
 3. **Start the server**
